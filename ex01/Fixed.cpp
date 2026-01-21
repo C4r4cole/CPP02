@@ -6,7 +6,7 @@
 /*   By: fmoulin <fmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:44:25 by fmoulin           #+#    #+#             */
-/*   Updated: 2026/01/21 16:57:39 by fmoulin          ###   ########.fr       */
+/*   Updated: 2026/01/21 18:50:12 by fmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ Fixed::Fixed(const Fixed &copy)
 	*this = copy;
 	std::cout << "Copy constructor called" << std::endl;
 }
+
+Fixed::Fixed(const int value)
+{
+	this->_FixedPoint = value << 8; // decale de 8 bits vers la gauche (reviens au meme que de multiplier par 256)
+}
+
+Fixed::Fixed(const float value)
+{
+	this->_FixedPoint = roundf(value * 256);
+}
+
 
 Fixed &Fixed::operator =(const Fixed &src)
 {
