@@ -6,7 +6,7 @@
 /*   By: fmoulin <fmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:44:25 by fmoulin           #+#    #+#             */
-/*   Updated: 2026/01/22 13:33:09 by fmoulin          ###   ########.fr       */
+/*   Updated: 2026/01/22 14:06:58 by fmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ Fixed::Fixed(const Fixed &copy)
 	std::cout << "Copy constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int value)
+Fixed::Fixed(const int value) : _FixedPoint(value << _FractionalBits)
 {
-	this->_FixedPoint = value << _FractionalBits; // decale de 8 bits vers la gauche (reviens au meme que de multiplier par 256)
+	// decale de 8 bits vers la gauche (reviens au meme que de multiplier par 256)
+	// exemple avec 1 :
+	// 1 en binaire = 00000001 (ou 2 puissance 1)
+	// 256 en binaire = 100000000 (ou 2 puissance 8)
+	// donc en effet, si on decale le premier bit de 8 rang vers la gauche c'est comme si on multipliait par 256
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float value)
+Fixed::Fixed(const float value) : _FixedPoint(roundf(value * (1 << _FractionalBits)))
 {
-	this->_FixedPoint = roundf(value * (1 << _FractionalBits));
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -77,7 +80,7 @@ int		Fixed::toInt(void) const
 	return (res);
 }
 
-std::ostream&	operator<<(std::ostream& os, const Fixed& fixed)
+std::ostream&	operator <<(std::ostream& os, const Fixed& fixed)
 {
 	os << fixed.toFloat();
 	
