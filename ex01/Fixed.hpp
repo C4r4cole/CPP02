@@ -6,7 +6,7 @@
 /*   By: fmoulin <fmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:44:21 by fmoulin           #+#    #+#             */
-/*   Updated: 2026/01/22 11:57:46 by fmoulin          ###   ########.fr       */
+/*   Updated: 2026/01/22 13:29:35 by fmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ class Fixed
 		int		toInt(void) const;
 };
 
-std::ostream&	overload(std::ostream&, const Fixed&);
+std::ostream&	operator<<(std::ostream&, const Fixed&);
 
 #endif
