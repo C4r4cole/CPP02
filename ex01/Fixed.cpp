@@ -6,7 +6,7 @@
 /*   By: fmoulin <fmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:44:25 by fmoulin           #+#    #+#             */
-/*   Updated: 2026/01/21 18:50:12 by fmoulin          ###   ########.fr       */
+/*   Updated: 2026/01/22 12:28:35 by fmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ Fixed::Fixed(const Fixed &copy)
 
 Fixed::Fixed(const int value)
 {
-	this->_FixedPoint = value << 8; // decale de 8 bits vers la gauche (reviens au meme que de multiplier par 256)
+	this->_FixedPoint = value << _FractionalBits; // decale de 8 bits vers la gauche (reviens au meme que de multiplier par 256)
 }
 
 Fixed::Fixed(const float value)
 {
-	this->_FixedPoint = roundf(value * 256);
+	this->_FixedPoint = roundf(value * (1 << _FractionalBits));
 }
-
 
 Fixed &Fixed::operator =(const Fixed &src)
 {
@@ -58,4 +57,28 @@ int		Fixed::getRawBits(void) const
 void		Fixed::setRawBits(int const raw)
 {
 	this->_FixedPoint = raw;
+}
+
+float	Fixed::toFloat(void) const
+{
+	float	res;
+	
+	res = this->_FixedPoint;
+	res = res / (1 << _FractionalBits);
+	return (res);
+}
+
+int		Fixed::toInt(void) const
+{
+	int	res;
+
+	res = this->_FixedPoint >> _FractionalBits;
+	return (res);
+}
+
+std::ostream&	operator<<(std::ostream& os, const Fixed& fixed)
+{
+	os << fixed.toFloat();
+	
+	return (os);
 }

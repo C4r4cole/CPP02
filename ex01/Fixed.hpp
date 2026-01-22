@@ -6,7 +6,7 @@
 /*   By: fmoulin <fmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:44:21 by fmoulin           #+#    #+#             */
-/*   Updated: 2026/01/21 17:24:44 by fmoulin          ###   ########.fr       */
+/*   Updated: 2026/01/22 11:57:46 by fmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ class Fixed
 		~Fixed();
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
+		float	toFloat(void) const;
+		int		toInt(void) const;
 };
+
+std::ostream&	overload(std::ostream&, const Fixed&);
 
 #endif
