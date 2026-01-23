@@ -6,7 +6,7 @@
 /*   By: fmoulin <fmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:44:21 by fmoulin           #+#    #+#             */
-/*   Updated: 2026/01/22 16:32:23 by fmoulin          ###   ########.fr       */
+/*   Updated: 2026/01/23 11:39:57 by fmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ class Fixed
 		Fixed operator --(int);
 
 		static Fixed &min(Fixed &value1, Fixed &value2);
-		static Fixed &min(const Fixed &value1, const Fixed &value2);
+		static const Fixed &min(const Fixed &value1, const Fixed &value2);
 		static Fixed &max(Fixed &value1, Fixed &value2);
-		static Fixed &max(const Fixed &value1, const Fixed &value2);
+		static const Fixed &max(const Fixed &value1, const Fixed &value2);
 };
 
 std::ostream&	operator <<(std::ostream&, const Fixed&);

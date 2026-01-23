@@ -6,7 +6,7 @@
 /*   By: fmoulin <fmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:44:25 by fmoulin           #+#    #+#             */
-/*   Updated: 2026/01/22 18:42:01 by fmoulin          ###   ########.fr       */
+/*   Updated: 2026/01/23 11:44:44 by fmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int const Fixed::_FractionalBits = 8;
 
 Fixed::Fixed() : _FixedPoint(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &copy)
@@ -38,18 +38,18 @@ Fixed::Fixed(const int value) : _FixedPoint(value << _FractionalBits)
 	// 1 en binaire = 00000001 (ou 2 puissance 1)
 	// 256 en binaire = 100000000 (ou 2 puissance 8)
 	// donc en effet, si on decale le premier bit de 8 rang vers la gauche c'est comme si on multipliait par 256
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float value) : _FixedPoint(roundf(value * (1 << _FractionalBits)))
 {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 }
 
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -102,7 +102,7 @@ Fixed &Fixed::operator =(const Fixed &src)
 {
 	if (this != &src)
 	this->_FixedPoint = src.getRawBits();
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 
@@ -226,7 +226,40 @@ Fixed Fixed::operator --(int)
 	return (tmp);
 }
 
-// static Fixed &min(Fixed &value1, Fixed &value2);
-// static Fixed &min(const Fixed &value1, const Fixed &value2);
-// static Fixed &max(Fixed &value1, Fixed &value2);
-// static Fixed &max(const Fixed &value1, const Fixed &value2);
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*                                  MAX & MIN                                 */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+Fixed &Fixed::min(Fixed &value1, Fixed &value2)
+{
+	if (value1._FixedPoint < value2._FixedPoint)
+		return(value1);
+	else
+		return (value2);
+}
+
+const Fixed &Fixed::min(const Fixed &value1, const Fixed &value2)
+{
+	if (value1._FixedPoint < value2._FixedPoint)
+		return (value1);
+	else
+		return (value2);
+}
+
+Fixed &Fixed::max(Fixed &value1, Fixed &value2)
+{
+	if (value1._FixedPoint > value2._FixedPoint)
+		return(value1);
+	else
+		return (value2);
+}
+
+const Fixed &Fixed::max(const Fixed &value1, const Fixed &value2)
+{
+	if (value1._FixedPoint > value2._FixedPoint)
+		return (value1);
+	else
+		return (value2);
+}
